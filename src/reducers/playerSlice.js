@@ -19,7 +19,7 @@ export const playerSlice = createSlice({
       state.speed -= 5;
     },
     speedSet: (state, action) => {
-      state.speed = action.payload.speed
+      state.speed = action.payload? (+action.payload) : state.speed;
     },
   },
 })

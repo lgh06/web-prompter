@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './Viewer.module.scss';
 import { genClassName, ImageHolder, innerHTML } from '../helpers';
 
-import { useSelector, useDispatch } from 'react-redux'
-import * as playerSlice from '../reducers/playerSlice'
+import { useSelector } from 'react-redux'
 // used for scss modules https://create-react-app.dev/docs/adding-a-css-modules-stylesheet
 const cn = genClassName(styles);
 
