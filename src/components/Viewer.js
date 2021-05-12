@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Viewer.module.scss';
 import { genClassName, ImageHolder, innerHTML } from '../helpers';
+// used for scss modules https://create-react-app.dev/docs/adding-a-css-modules-stylesheet
 const cn = genClassName(styles);
 
 export default function Controller() {
