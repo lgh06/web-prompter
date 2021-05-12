@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import aSlice from './reducers/aSlice'
+import player from './reducers/playerSlice'
 
 // https://redux-toolkit.js.org/usage/usage-guide
 export default configureStore({
   reducer: {
-    aSlice
+    player,
   },
 })
