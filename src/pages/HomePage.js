@@ -4,9 +4,7 @@ import Viewer from "../components/Viewer";
 
 export default function HomePage(){
   return (<div>
-    <header>Home Page</header>
-    <Controller></Controller>
     <Viewer></Viewer>
-  
+    <Controller></Controller>
   </div>);
 }

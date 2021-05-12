@@ -19,7 +19,7 @@ export default function App() {
   return (
     <Router>
       <div>
-        <ul>
+        <ul className="nav">
           <li>
             <Link to="/">Home</Link>
           </li>
