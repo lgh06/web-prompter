@@ -8,9 +8,12 @@ import {
 } from "react-router-dom";
 
 // https://loadable-components.com/docs/getting-started/
-import loadable from '@loadable/component'
 
-const Topics = loadable(() => import('./Topics'))
+// pages or components
+import HomePage from './pages/HomePage'
+
+// dynamically loaded pages or components
+import {AsyncPage} from './helper/Async'
 
 
 export default function App() {
@@ -30,23 +33,19 @@ export default function App() {
         </ul>
 
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
           <Route path="/about">
             <About />
           </Route>
           <Route path="/topics">
-            <Topics />
-          </Route>
-          <Route path="/">
-            <Home />
+            <AsyncPage page="TopicsPage" />
           </Route>
         </Switch>
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
 }
 
 function About() {

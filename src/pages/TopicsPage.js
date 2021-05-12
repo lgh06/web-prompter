@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 // https://reactrouter.com/web/example/nesting
-export default function Topics() {
+export default function TopicsPage() {
   let {path, url} = useRouteMatch();
 
   return (
