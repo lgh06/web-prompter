@@ -6,6 +6,8 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState: {
     speed: 0,
+    innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
+    appendMode: true,
   },
   reducers: {
     speedPlus: (state) => {
@@ -21,10 +23,19 @@ export const playerSlice = createSlice({
     speedSet: (state, action) => {
       state.speed = action.payload? (+action.payload) : state.speed;
     },
+    deleteInnerHTML: (state, action) => {
+      state.innerHTML = '';
+    },
+    setInnerHTML: (state, action) => {
+      state.innerHTML = action.payload;
+    },
+    setAppendMode: (state, action) => {
+      state.appendMode = action.payload;
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { speedPlus, speedMinus, speedSet } = playerSlice.actions
+export const { speedPlus, speedMinus, speedSet, deleteInnerHTML, setInnerHTML, setAppendMode } = playerSlice.actions
 
 export default playerSlice.reducer
