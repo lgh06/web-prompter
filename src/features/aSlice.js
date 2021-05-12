@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+// https://redux-toolkit.js.org/usage/usage-guide
 export const counterSlice = createSlice({
   name: 'counter',
   initialState: {

@@ -8,8 +8,9 @@ import {
   useParams
 } from "react-router-dom";
 
+// https://reactrouter.com/web/example/nesting
 export default function Topics() {
-  let match = useRouteMatch();
+  let {path, url} = useRouteMatch();
 
   return (
     <div>
@@ -17,10 +18,10 @@ export default function Topics() {
 
       <ul>
         <li>
-          <Link to={`${match.url}/components`}>Components</Link>
+          <Link to={`${url}/components`}>Components</Link>
         </li>
         <li>
-          <Link to={`${match.url}/props-v-state`}>
+          <Link to={`${url}/props-v-state`}>
             Props v. State
           </Link>
         </li>
@@ -31,11 +32,11 @@ export default function Topics() {
           2nd <Route> here as an "index" page for all topics, or
           the page that is shown when no topic is selected */}
       <Switch>
-        <Route path={`${match.path}/:topicId`}>
-          <Topic />
-        </Route>
-        <Route path={match.path}>
+        <Route exact path={path}>
           <h3>Please select a topic.</h3>
+        </Route>
+        <Route path={`${path}/:topicId`}>
+          <Topic />
         </Route>
       </Switch>
     </div>

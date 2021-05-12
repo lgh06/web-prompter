@@ -7,6 +7,7 @@ import {
   Link,
 } from "react-router-dom";
 
+// https://loadable-components.com/docs/getting-started/
 import loadable from '@loadable/component'
 
 const Topics = loadable(() => import('./Topics'))
