@@ -13,7 +13,7 @@ import {
 import HomePage from './pages/HomePage'
 
 // dynamically loaded pages or components
-import {AsyncPage} from './helper/Async'
+import {AsyncPage} from './helpers'
 
 
 export default function App() {

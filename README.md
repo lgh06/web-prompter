@@ -1,3 +1,6 @@
+# README
+npm i --sass-binary-site=http://npm.taobao.org/mirrors/node-sass
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
