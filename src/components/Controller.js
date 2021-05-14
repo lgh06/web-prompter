@@ -18,6 +18,32 @@ export default function Controller() {
     }))
     
   }
+  const cssNameAndHint = [
+    {
+      key: 'backgroundColor',
+      hint: '背景色',
+    },
+    {
+      key: 'color',
+      hint: '字体颜色',
+    },
+    {
+      key: 'fontFamily',
+      hint: '字体',
+    },
+    {
+      key: 'fontSize',
+      hint: '字体大小',
+    }, 
+    {
+      key: 'fontWeight',
+      hint: '字体粗细',
+    },
+    {
+      key: 'lineHeight',
+      hint: '行间距',
+    },
+  ]
   return (<div {...cn('controller-wrap')}>
     Speed
     <button onClick={()=>dispatch(player.setSpeed('+10'))}>+</button>
@@ -27,11 +53,11 @@ export default function Controller() {
     <button onClick={()=>dispatch(player.setInnerHTML(''))}>清空Clear</button>
     <button onClick={()=>dispatch(player.setPlay('start'))}>开始Begin</button>
     <br />
-    {['backgroundColor', 'fontSize', 'color','lineHeight', 'fontWeight'].map(v => {
+    {cssNameAndHint.map(v => {
       return (
         <>
-        <span>{v}</span> &nbsp;
-        <input type="text" name="" value={viewerCSS[v]} id="" placeholder={v} onInput={(e) => onChange(e, v)}/>
+        <span>{v.hint} {v.key}</span> &nbsp;
+        <input type="text" name="" value={viewerCSS[v.key]} id="" placeholder={v.key} onInput={(e) => onChange(e, v.key)}/>
         <br/>
         </>
       )

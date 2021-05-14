@@ -11,9 +11,12 @@ export const playerSlice = createSlice({
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
     play:0,
     viewerCSS: {
-      backgroundColor: '#eee',
+      backgroundColor: '#111',
+      color: 'white',
       fontSize: '72px',
       fontWeight: 'bold',
+      fontFamily: 'Microsoft YaHei',
+      lineHeight: '1.4'
     }
   },
   reducers: {

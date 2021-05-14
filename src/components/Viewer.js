@@ -14,7 +14,7 @@ export default function Viewer() {
 
   useEffect(() => {
     document.addEventListener('keydown',(e) => {
-      if(e.key === 'q' && play === 1){
+      if( (e.keyCode === 1 || e.keyCode === 87 ) && play === 1){
         dispatch(player.setPlay('quit'))      
       }
     })
