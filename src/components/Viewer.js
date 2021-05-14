@@ -18,10 +18,16 @@ export default function Viewer() {
         dispatch(player.setPlay('quit'))      
       }
     })
+    document.addEventListener('fullscreenchange', () => {
+      if (play === 1){
+        document.querySelector('pre.text').scrollTo(0, 0);
+      }
+    })
   });
   const onChange = (e) => {
     dispatch(player.setInnerHTML( e.target.innerHTML ))
-    console.log(e.target.innerHTML)
+    console.log(e.target.innerHTML,e.currentTarget.scrollHeight)
+    dispatch(player.setState({key: 'height', value: e.currentTarget.scrollHeight}));
   }
   return (<div {...cn('viewer-wrap')}>
     <div {...cn('viewer @viewer')} style={viewerCSS}>

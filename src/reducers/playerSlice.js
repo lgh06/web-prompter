@@ -9,9 +9,10 @@ export const playerSlice = createSlice({
   initialState: {
     speed: 0,
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
+    height: 600,
     play:0,
     viewerCSS: {
-      backgroundColor: '#111',
+      backgroundColor: '#333',
       color: 'white',
       fontSize: '72px',
       fontWeight: 'bold',
@@ -45,7 +46,8 @@ export const playerSlice = createSlice({
       if (p === 'start') {
         state.play = 1;
         nosleep.enable();
-        document.querySelector('.viewer').requestFullscreen()
+        const $viewer = document.querySelector('.viewer')
+        $viewer.requestFullscreen();
       }else if (p === 'quit'){
         state.play = 0;
         nosleep.disable();
@@ -55,11 +57,15 @@ export const playerSlice = createSlice({
     },
     setViewerCSS: (state, action) => {
       state.viewerCSS = Object.assign({}, state.viewerCSS, action.payload);
+    },
+    setState: (state, action) => {
+      const {key, value} = action.payload;
+      state[key] = value;
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setSpeed, setInnerHTML, setPlay, setViewerCSS } = playerSlice.actions
+export const { setSpeed, setInnerHTML, setPlay, setViewerCSS, setState } = playerSlice.actions
 
 export default playerSlice.reducer
