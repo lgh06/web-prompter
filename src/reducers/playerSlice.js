@@ -10,18 +10,19 @@ export const playerSlice = createSlice({
     appendMode: true,
   },
   reducers: {
-    speedPlus: (state) => {
+    setSpeed: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.speed += 5;
-    },
-    speedMinus: (state) => {
-      state.speed -= 5;
-    },
-    speedSet: (state, action) => {
-      state.speed = action.payload? (+action.payload) : state.speed;
+      var startWithPlusOrMinus = String(action.payload).indexOf('+') === 0 || 
+        String(action.payload).indexOf('-') === 0;
+
+      if(startWithPlusOrMinus){
+        state.speed += (+action.payload);
+      } else {
+        state.speed = action.payload? (+action.payload) : state.speed;
+      }
     },
     deleteInnerHTML: (state, action) => {
       state.innerHTML = '';
@@ -36,6 +37,6 @@ export const playerSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { speedPlus, speedMinus, speedSet, deleteInnerHTML, setInnerHTML, setAppendMode } = playerSlice.actions
+export const { setSpeed, deleteInnerHTML, setInnerHTML, setAppendMode } = playerSlice.actions
 
 export default playerSlice.reducer
