@@ -9,34 +9,25 @@ import * as player from '../reducers/playerSlice'
 const cn = genClassName(styles);
 
 export default function Viewer() {
-  const speed = useSelector((state) => state.player.speed)
-  const innerHTML = useSelector((state) => state.player.innerHTML)
-  const appendMode = useSelector((state) => state.player.appendMode)
+  const { speed, innerHTML } = useSelector((state) => state.player)
   const dispatch = useDispatch()
-  // https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event
-  const paste = (event) => {
-    // https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData
-    let paste = (event.clipboardData || window.clipboardData).getData('text/plain');
-    console.log(paste)
-    let pastedWithBr = paste.replace(/\r\n/g,'<br/>')
-
-    // event.target.innerHTML += paste.replace(/\r\n/g,'<br/>')
-    if (appendMode) {
-      dispatch(player.setInnerHTML(innerHTML + pastedWithBr));
-    } else {
-      dispatch(player.setInnerHTML(pastedWithBr));
-    }
-    event.preventDefault();
-  }
 
   // const click = (event) => {
   //   console.log(event)
   //   event.nativeEvent.target.select();
   // }
+  const onChange = (e) => {
+    dispatch(player.setInnerHTML( e.target.innerHTML ))
+    console.log(e.target.innerHTML)
+  }
   return (<div {...cn('viewer-wrap')}>
     <div {...cn('viewer')}>
-      <p {...cn('text')} contentEditable onPaste={paste} {...setInnerHTML(innerHTML)}>
-      </p>
+      <pre {...cn('text')} contentEditable onInput={onChange}
+        suppressContentEditableWarning={true}
+      >
+      You can paste or input texts here. <br/>
+      你可以把文字粘贴在这里。或用输入法输入。
+      </pre>
     </div>
     <div {...cn('status')} {...setInnerHTML('speed is ' + speed)} >
       
