@@ -13,7 +13,7 @@ export default function Controller() {
     Speed
     <button onClick={()=>dispatch(player.setSpeed('+10'))}>+</button>
     <button onClick={()=>dispatch(player.setSpeed('-10'))}>-</button>
-    <button onClick={()=>dispatch(player.deleteInnerHTML())}>全删除</button>
+    <button onClick={()=>dispatch(player.setInnerHTML(''))}>全删除</button>
     <input type="number" value={speed} onChange={(e)=>dispatch(player.setSpeed(e.target.value))}></input>
     <input type="checkbox" checked={appendMode} onChange={(e)=>dispatch(player.setAppendMode(e.target.checked))} id="appendMode"/>
     <label htmlFor="appendMode"> {appendMode ? '末尾追加' : '整体替换'} </label>

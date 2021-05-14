@@ -24,9 +24,6 @@ export const playerSlice = createSlice({
         state.speed = action.payload? (+action.payload) : state.speed;
       }
     },
-    deleteInnerHTML: (state, action) => {
-      state.innerHTML = '';
-    },
     setInnerHTML: (state, action) => {
       state.innerHTML = action.payload;
     },
@@ -37,6 +34,6 @@ export const playerSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setSpeed, deleteInnerHTML, setInnerHTML, setAppendMode } = playerSlice.actions
+export const { setSpeed, setInnerHTML, setAppendMode } = playerSlice.actions
 
 export default playerSlice.reducer
