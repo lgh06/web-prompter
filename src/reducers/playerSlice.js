@@ -1,6 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import {dispatch} from 'react-redux'
 import NoSleep from 'nosleep.js'
 let nosleep = new NoSleep();
+
+
+const setPlayAndAnimation = createAsyncThunk(
+  'player/setPlayAndAnimation',
+  async (payload, { dispatch, getState }) => {
+    dispatch(setPlay(payload))
+    //     dispatch({type:'player/animation'})
+    dispatch(animation(payload))
+    // return 1;
+  }
+)
 
 // one file mapping to one logic feature, basically.
 // https://redux-toolkit.js.org/usage/usage-guide
@@ -48,11 +60,12 @@ export const playerSlice = createSlice({
         nosleep.enable();
         const $viewer = document.querySelector('.viewer')
         $viewer.requestFullscreen();
-      }else if (p === 'quit'){
+        playerSlice.actions.animation();
+      }else if (p === 'exit'){
         state.play = 0;
         nosleep.disable();
         // document.querySelector('.viewer').exitFullscreen()
-        document.exitFullscreen()
+        document.fullscreenElement && document.exitFullscreen()
       }
     },
     setViewerCSS: (state, action) => {
@@ -61,11 +74,23 @@ export const playerSlice = createSlice({
     setState: (state, action) => {
       const {key, value} = action.payload;
       state[key] = value;
+    },
+    animation: (state, action) => {
+      console.log('inside animation')
+      if (action.payload === 'start'){
+        document.querySelector('pre.text').style.transform = 'translateY(-100px)'
+      }else if (action.payload === 'exit'){
+        document.querySelector('pre.text').style.transform = ''
+      }
     }
   },
+  extraReducers:{
+    // [setPlayAsync.fulfilled]: (state, action) => {}
+  }
 })
 
 // Action creators are generated for each case reducer function
-export const { setSpeed, setInnerHTML, setPlay, setViewerCSS, setState } = playerSlice.actions
+export const { setSpeed, setInnerHTML, setPlay, setViewerCSS, setState, animation } = playerSlice.actions
+export {setPlayAndAnimation}
 
 export default playerSlice.reducer

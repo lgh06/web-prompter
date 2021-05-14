@@ -5,7 +5,7 @@ import styles from './Controller.module.scss';
 
 const cn = genClassName(styles);
 
-export default function Controller() {
+export default function Controller(props) {
   const dispatch = useDispatch()
   const { speed, viewerCSS } = useSelector((state) => state.player)
   const onChange = (e, name) => {
@@ -51,7 +51,7 @@ export default function Controller() {
     <input type="number" value={speed} onChange={(e)=>dispatch(player.setSpeed(e.target.value))}></input>
     <br />
     <button onClick={()=>dispatch(player.setInnerHTML(''))}>清空Clear</button>
-    <button onClick={()=>dispatch(player.setPlay('start'))}>开始Begin</button>
+    <button onClick={()=>dispatch(player.setPlayAndAnimation('start'))}>开始Start</button>
     <br />
     {cssNameAndHint.map(v => {
       return (

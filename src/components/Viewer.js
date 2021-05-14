@@ -15,7 +15,7 @@ export default function Viewer() {
   useEffect(() => {
     document.addEventListener('keydown',(e) => {
       if( (e.keyCode === 1 || e.keyCode === 87 ) && play === 1){
-        dispatch(player.setPlay('quit'))      
+        dispatch(player.setPlay('exit'))      
       }
     })
     document.addEventListener('fullscreenchange', () => {
@@ -37,7 +37,7 @@ export default function Viewer() {
       You can paste or input texts here. <br/>
       你可以把文字粘贴在这里。或用输入法输入。
       </pre>
-      <div {...cn('quit-full @quit-full')} onClick={() => dispatch(player.setPlay('quit'))}>退出Quit</div>
+      <div {...cn('exit-full @exit-full')} onClick={() => dispatch(player.setPlayAndAnimation('exit'))}>退出Exit</div>
     </div>
     <div {...cn('status')} {...setInnerHTML('speed is ' + speed)} >
       
