@@ -9,7 +9,7 @@ import * as player from '../reducers/playerSlice'
 const cn = genClassName(styles);
 
 export default function Viewer() {
-  const { speed, innerHTML, play } = useSelector((state) => state.player)
+  const { speed, innerHTML, play, viewerCSS } = useSelector((state) => state.player)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Viewer() {
     console.log(e.target.innerHTML)
   }
   return (<div {...cn('viewer-wrap')}>
-    <div {...cn('viewer @viewer')}>
+    <div {...cn('viewer @viewer')} style={viewerCSS}>
       <pre {...cn('text @text')} contentEditable={play ? 'false': 'true'} onInput={onChange}
         suppressContentEditableWarning={true}
       >
