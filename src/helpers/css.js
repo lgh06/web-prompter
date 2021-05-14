@@ -6,7 +6,12 @@ function genClassString(styles) {
     let arr = String(classStr).trim().split(' ');
     let result = '';
     arr.forEach(v => {
-      result += styles[v] || '';
+      // if cn('@x'), use original 'xx' as classname.
+      if (v.indexOf('@')===0) {
+        result += v.substr(1);
+      } else {
+        result += styles[v] || '';
+      }
       result += ' ';
     });
     return result;

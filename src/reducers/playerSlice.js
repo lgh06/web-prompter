@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
+import NoSleep from 'nosleep.js'
+let nosleep = new NoSleep();
 
 // one file mapping to one logic feature, basically.
 // https://redux-toolkit.js.org/usage/usage-guide
@@ -7,7 +9,7 @@ export const playerSlice = createSlice({
   initialState: {
     speed: 0,
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
-    appendMode: true,
+    play:0,
   },
   reducers: {
     setSpeed: (state, action) => {
@@ -26,11 +28,27 @@ export const playerSlice = createSlice({
     },
     setInnerHTML: (state, action) => {
       state.innerHTML = action.payload;
+      if (action.payload === '') {
+        document.querySelector('pre.text').innerHTML = '';
+      }
     },
+    setPlay: (state, action) =>{
+      let p = action.payload;
+      if (p === 'start') {
+        state.play = 1;
+        nosleep.enable();
+        document.querySelector('.viewer').requestFullscreen()
+      }else if (p === 'quit'){
+        state.play = 0;
+        nosleep.disable();
+        // document.querySelector('.viewer').exitFullscreen()
+        document.exitFullscreen()
+      }
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setSpeed, setInnerHTML } = playerSlice.actions
+export const { setSpeed, setInnerHTML, setPlay } = playerSlice.actions
 
 export default playerSlice.reducer

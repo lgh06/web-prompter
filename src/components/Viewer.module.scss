@@ -18,6 +18,18 @@
     word-break: break-all;
     white-space: pre-wrap;
   }
+  &:fullscreen{
+    .quit-full{
+      display:block
+    }
+  }
+  .quit-full{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #aaa;
+  }
 }
 .status{
   font-size: 80%;
