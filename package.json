@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cloudbase/js-sdk": "^1.5.0",
     "@craco/craco": "^6.1.1",
     "@loadable/component": "^5.14.1",
     "@reduxjs/toolkit": "^1.5.1",

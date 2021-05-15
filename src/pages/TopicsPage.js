@@ -8,6 +8,10 @@ import {
   useParams
 } from "react-router-dom";
 
+// https://cloud.tencent.com/document/product/876/19363
+// https://console.cloud.tencent.com/tcb/env/login
+import cloudbase from "@cloudbase/js-sdk";
+
 // node引入包名
 const iot = require('alibabacloud-iot-device-sdk/dist/alibabacloud-iot-device-sdk.js');
 // 浏览器、微信小程序，支付宝小程序引入./dist编译的js文件
@@ -18,6 +22,20 @@ const iot = require('alibabacloud-iot-device-sdk/dist/alibabacloud-iot-device-sd
 // https://reactrouter.com/web/example/nesting
 export default function TopicsPage() {
   let {path, url} = useRouteMatch();
+  console.log(cloudbase)
+  const app = cloudbase.init({
+    env: 'hello-cloudbase-4go22m4jaa7a36e5' // 您的环境id
+  })
+  var auth = app.auth({persistence: 'local'});
+
+
+  async function login(){
+    const signInResp = await auth.anonymousAuthProvider().signIn();
+    // 匿名登录成功检测登录状态isAnonymous字段为true
+    const loginState = await auth.getLoginState();
+    console.log(signInResp, loginState.isAnonymous); // true
+  }
+
   useEffect(() => {
 
     // TODO fingerprintjs, clientjs or their alternatives
@@ -47,6 +65,16 @@ export default function TopicsPage() {
     device.on('message', (topic, payload) => {
       console.log(topic, payload.toString());
     });
+
+    async function dbLogics(){
+      login();
+      const db = app.database();
+      const devices = db.collection("devices");
+      const result = await devices.where({deviceId: '0000'}).get();
+      console.log('tencent cloudbase', result)
+    }
+    dbLogics();
+
     // clean up things when component destroyed.
     // https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup 
     return () => { 
