@@ -10,14 +10,15 @@ import {
 
 // https://cloud.tencent.com/document/product/876/19363
 // https://console.cloud.tencent.com/tcb/env/login
+// https://docs.cloudbase.net/api-reference/webv2/initialization.html
 import cloudbase from "@cloudbase/js-sdk";
 
 // node引入包名
-const iot = require('alibabacloud-iot-device-sdk/dist/alibabacloud-iot-device-sdk.js');
 // 浏览器、微信小程序，支付宝小程序引入./dist编译的js文件
-// js版本下载地址：
+//  js版本下载地址：
 //    https://github.com/aliyun/alibabacloud-iot-device-sdk/
 //  https://github.com/mqttjs/MQTT.js/tree/v3.0.0
+const iot = require('alibabacloud-iot-device-sdk/dist/alibabacloud-iot-device-sdk.js');
 
 // https://reactrouter.com/web/example/nesting
 export default function TopicsPage() {
