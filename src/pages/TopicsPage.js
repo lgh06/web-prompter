@@ -16,7 +16,7 @@ import cloudbase from "@cloudbase/js-sdk";
 // node引入包名
 // 浏览器、微信小程序，支付宝小程序引入./dist编译的js文件
 //  js版本下载地址：
-//    https://github.com/aliyun/alibabacloud-iot-device-sdk/
+//  https://github.com/aliyun/alibabacloud-iot-device-sdk/
 //  https://github.com/mqttjs/MQTT.js/tree/v3.0.0
 const iot = require('alibabacloud-iot-device-sdk/dist/alibabacloud-iot-device-sdk.js');
 
@@ -54,19 +54,29 @@ export default function TopicsPage() {
       // `hello!!!`
     });
     // get为订阅的信息
-    const sb = `/${productKey}/${deviceName}/user/get`;
+    // data 为双向
+    const sb = `/${productKey}/${deviceName}/user/data`;
     device.subscribe(sb , null , (...e) => {
       console.log('inside subscribe', e)
     });
     device.on(`connect`, (...e) => {
       console.log(`connect successfully!`, e);
       // update 为上报
-      device.publish(`/${productKey}/${deviceName}/user/update`, `hello world!`);
+      // data为双向
+      const id = setInterval(() => {
+        device.publish(`/${productKey}/${deviceName}/user/data`, `hello world!` + new Date(), (err) => {
+          if (err) {
+            clearInterval(id);
+          }
+        });
+      }, 3000);
     });
     device.on('message', (topic, payload) => {
       console.log(topic, payload.toString());
     });
-
+    device.on('error', (err) => {
+      console.log('error:',err);
+    });
     async function dbLogics(){
       login();
       const db = app.database();

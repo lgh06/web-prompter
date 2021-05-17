@@ -1,6 +1,16 @@
 # README
 npm i --sass-binary-site=http://npm.taobao.org/mirrors/node-sass
 
+# TODO 
+
+1. play / pause / exit and use setInterval and css transform / transition
+2. gitee / github user login 
+3. one user mapping to one aliyun IOT device, one user using one logic IOT device
+3. dynamically register device, product secret should be protected using cloud functions.
+4. control device & display device setting on frontend page.
+5. remote control play / pause / prev / scroll faster
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
