@@ -12,7 +12,7 @@ import {
 import HomePage from './pages/HomePage'
 
 // dynamically loaded pages or components
-import {AsyncPage} from './helpers'
+import {AsyncPage, ErrorBoundary} from './helpers'
 
 
 export default function App() {
@@ -33,21 +33,25 @@ export default function App() {
             <Link to="/topics">Topics</Link>
           </li>
         </ul>
-
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/3login">
-            <AsyncPage page="ThirdPartyLogin" />
-          </Route>
-          <Route path="/topics">
-            <AsyncPage page="TopicsPageMQTT" />
-          </Route>
-        </Switch>
+        <ErrorBoundary>
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/3login">
+              <AsyncPage page="ThirdPartyLogin" />
+            </Route>
+            <Route path="/topics">
+              <AsyncPage page="TopicsPageMQTT" />
+            </Route>
+            <Route path="*">
+              <>404 error, not found</>
+            </Route>
+          </Switch>
+        </ErrorBoundary>
       </div>
     </Router>
   );
