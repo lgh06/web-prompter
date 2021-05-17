@@ -12,6 +12,7 @@ import {
 // https://console.cloud.tencent.com/tcb/env/login
 // https://docs.cloudbase.net/api-reference/webv2/initialization.html
 import cloudbase from "@cloudbase/js-sdk";
+import { http } from "../helpers";
 
 // node引入包名
 // 浏览器、微信小程序，支付宝小程序引入./dist编译的js文件
@@ -83,6 +84,10 @@ export default function TopicsPage() {
       const devices = db.collection("devices");
       const result = await devices.where({deviceId: '0000'}).get();
       console.log('tencent cloudbase', result)
+
+      http.post('https://service-ripfq8y3-1251786267.sh.apigw.tencentcs.com/release/register',{deviceName: 'test'+ Date.now()}).then(response => {
+        console.log(response)
+      })
     }
     dbLogics();
 
