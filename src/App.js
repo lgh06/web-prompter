@@ -39,7 +39,7 @@ export default function App() {
             <About />
           </Route>
           <Route path="/topics">
-            <AsyncPage page="TopicsPage" />
+            <AsyncPage page="TopicsPageMQTT" />
           </Route>
         </Switch>
       </div>
