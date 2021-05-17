@@ -56,20 +56,20 @@ export default function TopicsPage() {
       deviceName
     }productKey${productKey}random${random}`;
     const signedContent = cryptojs.HmacSHA1(content,productSecret).toString();
-    const device = mqtt.connect(`wss://${productKey}.iot-as-mqtt.cn-shanghai.aliyuncs.com:443`,{
-      clientId: `${clientId}|securemode=-2,authType=regnwl,random=${random},signmethod=hmacsha1|`,
-      username: `${deviceName}&${productKey}`,
-      password: signedContent,
-      keepalive: 300,
-    });
+    // const device = mqtt.connect(`wss://${productKey}.iot-as-mqtt.cn-shanghai.aliyuncs.com:443`,{
+    //   clientId: `${clientId}|securemode=-2,authType=regnwl,random=${random},signmethod=hmacsha1|`,
+    //   username: `${deviceName}&${productKey}`,
+    //   password: signedContent,
+    //   keepalive: 300,
+    // });
     // get为订阅的信息
     // data 为双向
     // const sb = `/${productKey}/${deviceName}/user/data`;
     // device.subscribe(sb , null , (...e) => {
     //   console.log('inside subscribe', e)
     // });
-    device.on(`connect`, (...e) => {
-      console.log(`connect successfully!`, e);
+    // device.on(`connect`, (...e) => {
+      // console.log(`connect successfully!`, e);
       // update 为上报
       // data为双向
       // const id = setInterval(() => {
@@ -79,13 +79,13 @@ export default function TopicsPage() {
       //     }
       //   });
       // }, 3000);
-    });
-    device.on('message', (topic, payload) => {
-      console.log(topic, payload.toString());
-    });
-    device.on('error', (err) => {
-      console.log('error:',err);
-    });
+    // });
+    // device.on('message', (topic, payload) => {
+    //   console.log(topic, payload.toString());
+    // });
+    // device.on('error', (err) => {
+    //   console.log('error:',err);
+    // });
     async function dbLogics(){
       login();
       const db = app.database();
@@ -103,7 +103,7 @@ export default function TopicsPage() {
     // https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup 
     return () => { 
       // device.unsubscribe(sb, (...e)=>console.log('inside unsubscribe',e));
-      device.end({force: true}, (...e)=>console.log('inside end',e))
+      // device.end({force: true}, (...e)=>console.log('inside end',e))
     }
   }, []); // [] empty array 
   // see https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects

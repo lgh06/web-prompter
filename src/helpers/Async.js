@@ -5,7 +5,8 @@ import loadable from '@loadable/component'
 // https://loadable-components.com/docs/dynamic-import/
 const DefaultLoading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 const AsyncPage = loadable(props => import(`../pages/${props.page}`), {
-  fallback: <DefaultLoading></DefaultLoading>
+  fallback: <DefaultLoading></DefaultLoading>,
+  cacheKey: props => props.page,
 })
 
 const AsyncComp = loadable(props => import(`../components/${props.comp}`), {
