@@ -35,9 +35,16 @@ export default function Viewer() {
         suppressContentEditableWarning={true}
       >
       You can paste or input texts here. <br/>
-      你可以把文字粘贴在这里。或用输入法输入。
+      你可以把文字粘贴在这里。或用输入法输入。 <br/>
+      Ctrl + Shift + V , or right click, paste text only. <br/>
+      Ctrl + Shift + V ， 或 右键， 粘贴为纯文本 。
       </pre>
-      <div {...cn('exit-full @exit-full')} onClick={() => dispatch(player.setPlayAndAnimation('exit'))}>退出Exit</div>
+      <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('prev'))}>向前Prev</div>
+      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('-10'))}>慢点Slower</div>
+      <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('pause'))}>暂停Pause</div>
+      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('+10'))}>快点Faster</div>
+      <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('next'))}>向后Next</div>
+      <div {...cn('exit-full @exit-full btn')} onClick={() => dispatch(player.setPlayAndAnimation('exit'))}>退出Exit</div>
     </div>
     <div {...cn('status')} {...setInnerHTML('speed is ' + speed)} >
       

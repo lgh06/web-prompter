@@ -24,9 +24,6 @@ export default function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
             <Link to="/3login">ThirdPartyLogin</Link>
           </li>
           <li>
@@ -37,9 +34,6 @@ export default function App() {
           <Switch>
             <Route exact path="/">
               <HomePage />
-            </Route>
-            <Route path="/about">
-              <About />
             </Route>
             <Route path="/3login">
               <AsyncPage page="ThirdPartyLogin" />
@@ -55,8 +49,4 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function About() {
-  return <h2>About</h2>;
 }

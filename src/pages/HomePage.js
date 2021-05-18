@@ -1,5 +1,5 @@
 import React from "react";
-import Controller from "../components/Controller";
+import Setting from "../components/Setting";
 import Viewer from "../components/Viewer";
 
 export default function HomePage(){
@@ -7,6 +7,6 @@ export default function HomePage(){
     minHeight: '360px',
   }}>
     <Viewer></Viewer>
-    <Controller></Controller>
+    <Setting></Setting>
   </div>);
 }

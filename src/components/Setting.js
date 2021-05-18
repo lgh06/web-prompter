@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as player from '../reducers/playerSlice'
 import { genClassName } from '../helpers';
-import styles from './Controller.module.scss';
+import styles from './Setting.module.scss';
 
 const cn = genClassName(styles);
 
-export default function Controller(props) {
+export default function Setting(props) {
   const dispatch = useDispatch()
   const { speed, viewerCSS } = useSelector((state) => state.player)
   const onChange = (e, name) => {
@@ -44,7 +44,7 @@ export default function Controller(props) {
       hint: '行间距',
     },
   ]
-  return (<div {...cn('controller-wrap')}>
+  return (<div {...cn('setting-wrap')}>
     Speed
     <button onClick={()=>dispatch(player.setSpeed('+10'))}>+</button>
     <button onClick={()=>dispatch(player.setSpeed('-10'))}>-</button>

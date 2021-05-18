@@ -22,7 +22,8 @@ export const playerSlice = createSlice({
     speed: 0,
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
     height: 600,
-    play:0,
+    playing:0,
+    paused: 0,
     viewerCSS: {
       backgroundColor: '#333',
       color: 'white',
@@ -56,13 +57,13 @@ export const playerSlice = createSlice({
     setPlay: (state, action) =>{
       let p = action.payload;
       if (p === 'start') {
-        state.play = 1;
+        state.playing = 1;
         nosleep.enable();
         const $viewer = document.querySelector('.viewer')
         $viewer.requestFullscreen();
         playerSlice.actions.animation();
       }else if (p === 'exit'){
-        state.play = 0;
+        state.playing = 0;
         nosleep.disable();
         // document.querySelector('.viewer').exitFullscreen()
         document.fullscreenElement && document.exitFullscreen()
