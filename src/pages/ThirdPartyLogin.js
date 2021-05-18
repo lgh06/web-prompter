@@ -33,7 +33,7 @@ export default function ThirdPartyLogin() {
     }).then(res =>{
       console.log(res)
       if (!res.error){
-        fetch('https://gitee.com/api/v5/user?access_token=' + res.access_token).then(res =>{
+        http.get('https://gitee.com/api/v5/user?access_token=' + res.access_token).then(res =>{
           console.log(res)
         })
       } else {

@@ -13,5 +13,7 @@ function genFetch(method) {
 const http = {
   post: genFetch('post'),
   POST: genFetch('post'),
+  get: genFetch('get'),
+  GET: genFetch('get'),
 }
 export { http };
