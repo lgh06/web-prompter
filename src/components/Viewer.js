@@ -9,7 +9,7 @@ import * as player from '../reducers/playerSlice'
 const cn = genClassName(styles);
 
 export default function Viewer() {
-  const { speed, innerHTML, playing, viewerCSS, movedHeight } = useSelector((state) => state.player)
+  const { speed, playing, viewerCSS, movedHeight, paused } = useSelector((state) => state.player)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,14 +35,17 @@ export default function Viewer() {
         dispatch(player.setState({key: 'movedHeight', value: tmpMovedHeight}))
       }, 400)
     } else {
-      dispatch(player.setState({key: 'movedHeight', value: 0}))
+      clearInterval(intervalId);
+    }
+
+    if (paused) {
       clearInterval(intervalId);
     }
 
     return () =>{
       clearInterval(intervalId);
     }
-  }, [playing, speed, movedHeight])
+  }, [playing, speed, movedHeight, paused])
 
   const onChange = (e) => {
     dispatch(player.setInnerHTML( e.target.innerHTML ))
@@ -61,8 +64,10 @@ export default function Viewer() {
       Ctrl + Shift + V ， 或 右键， 粘贴为纯文本 。
       </pre>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('prev'))}>向前Prev</div>
-      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('-20'))}>慢点Slower</div>
-      <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('pause'))}>暂停Pause</div>
+      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('-10'))}>慢点Slower</div>
+      <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('pause'))}>
+        {paused?'恢复Continue' :'暂停Pause'}
+      </div>
       <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('+20'))}>快点Faster</div>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('next'))}>向后Next</div>
       <div {...cn('exit-full @exit-full btn')} 
@@ -71,6 +76,8 @@ export default function Viewer() {
       }>
         {playing ? '退出Exit' : '开始Start'}
       </div>
+      <div {...cn('btn clear')} onClick={()=>dispatch(player.setInnerHTML(''))}>清空Clear</div>
+
     </div>
     <div {...cn('status')} {...setInnerHTML('speed is ' + speed)} >
       

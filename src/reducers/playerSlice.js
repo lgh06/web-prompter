@@ -66,6 +66,8 @@ export const playerSlice = createSlice({
         // playerSlice.actions.animation();
       }else if (p === 'exit'){
         state.playing = 0;
+        state.paused = 0;
+        state.movedHeight = 0;
         nosleep.disable();
         // document.querySelector('.viewer').exitFullscreen()
         document.fullscreenElement && document.exitFullscreen()
@@ -81,6 +83,8 @@ export const playerSlice = createSlice({
           h = 0
         }
         state.movedHeight = h;
+      }else if (p === 'pause'){
+        state.paused = +(!state.paused);
       }
     },
     setViewerCSS: (state, action) => {
