@@ -19,7 +19,7 @@ const setPlayAndAnimation = createAsyncThunk(
 export const playerSlice = createSlice({
   name: 'player',
   initialState: {
-    speed: 20,
+    speed: 10,
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
     scrollHeight: 600, // whole pre height
     clientHeight: 1080, // one screen height,
