@@ -26,8 +26,10 @@ export default function Viewer() {
   });
   const onChange = (e) => {
     dispatch(player.setInnerHTML( e.target.innerHTML ))
-    console.log(e.target.innerHTML,e.currentTarget.scrollHeight)
-    dispatch(player.setState({key: 'height', value: e.currentTarget.scrollHeight}));
+    console.log(e.currentTarget.scrollHeight,  document.body.clientHeight)
+    debugger
+    dispatch(player.setState({key: 'scrollHeight', value: e.currentTarget.scrollHeight}));
+    dispatch(player.setState({key: 'clientHeight', value: document.body.clientHeight}));
   }
   return (<div {...cn('viewer-wrap')}>
     <div {...cn('viewer @viewer')} style={viewerCSS}>

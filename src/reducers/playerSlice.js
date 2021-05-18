@@ -21,7 +21,8 @@ export const playerSlice = createSlice({
   initialState: {
     speed: 0,
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
-    height: 600,
+    scrollHeight: 600, // whole pre height
+    clientHeight: 1080, // one screen height
     playing:0,
     paused: 0,
     viewerCSS: {
@@ -61,7 +62,7 @@ export const playerSlice = createSlice({
         nosleep.enable();
         const $viewer = document.querySelector('.viewer')
         $viewer.requestFullscreen();
-        playerSlice.actions.animation();
+        // playerSlice.actions.animation();
       }else if (p === 'exit'){
         state.playing = 0;
         nosleep.disable();
@@ -79,7 +80,7 @@ export const playerSlice = createSlice({
     animation: (state, action) => {
       console.log('inside animation')
       if (action.payload === 'start'){
-        document.querySelector('pre.text').style.transform = 'translateY(-100px)'
+        document.querySelector('pre.text').style.transform = `translateY(-${state.scrollHeight - state.clientHeight/2}px)`
       }else if (action.payload === 'exit'){
         document.querySelector('pre.text').style.transform = ''
       }

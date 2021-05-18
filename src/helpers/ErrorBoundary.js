@@ -20,7 +20,10 @@ export class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <h1>Network or internal server error. Please try again.</h1>;
+      return (<>
+      <h1>Network or internal server error. Please try again.</h1>
+      <h1>网络问题，或内部服务器错误。请稍候再试。</h1>
+      </>);
     }
 
     return this.props.children; 
