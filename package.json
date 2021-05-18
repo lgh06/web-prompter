@@ -2,6 +2,7 @@
   "name": "prompter-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@cloudbase/js-sdk": "^1.5.0",
     "@craco/craco": "^6.1.1",
