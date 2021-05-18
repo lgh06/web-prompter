@@ -9,18 +9,13 @@ import * as player from '../reducers/playerSlice'
 const cn = genClassName(styles);
 
 export default function Viewer() {
-  const { speed, innerHTML, play, viewerCSS } = useSelector((state) => state.player)
+  const { speed, innerHTML, playing, viewerCSS } = useSelector((state) => state.player)
   const dispatch = useDispatch()
 
   useEffect(() => {
     document.addEventListener('keydown',(e) => {
-      if( (e.keyCode === 1 || e.keyCode === 87 ) && play === 1){
+      if( (e.keyCode === 1 || e.keyCode === 87 ) && playing === 1){
         dispatch(player.setPlay('exit'))      
-      }
-    })
-    document.addEventListener('fullscreenchange', () => {
-      if (play === 1){
-        document.querySelector('pre.text').scrollTo(0, 0);
       }
     })
   });
@@ -33,7 +28,7 @@ export default function Viewer() {
   }
   return (<div {...cn('viewer-wrap')}>
     <div {...cn('viewer @viewer')} style={viewerCSS}>
-      <pre {...cn('text @text')} contentEditable={play ? 'false': 'true'} onInput={onChange}
+      <pre {...cn('text @text')} contentEditable={playing ? 'false': 'true'} onInput={onChange}
         suppressContentEditableWarning={true}
       >
       You can paste or input texts here. <br/>
@@ -46,7 +41,12 @@ export default function Viewer() {
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('pause'))}>暂停Pause</div>
       <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('+10'))}>快点Faster</div>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('next'))}>向后Next</div>
-      <div {...cn('exit-full @exit-full btn')} onClick={() => dispatch(player.setPlayAndAnimation('exit'))}>退出Exit</div>
+      <div {...cn('exit-full @exit-full btn')} 
+        onClick={() => playing ? dispatch(player.setPlayAndAnimation('exit')):
+          dispatch(player.setPlayAndAnimation('start'))
+      }>
+        {playing ? '退出Exit' : '开始Start'}
+      </div>
     </div>
     <div {...cn('status')} {...setInnerHTML('speed is ' + speed)} >
       
