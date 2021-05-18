@@ -36,6 +36,7 @@ export default function ThirdPartyLogin() {
         http.get('https://gitee.com/api/v5/user', {
           access_token: res.access_token
         }).then(res =>{
+          // TODO save to store and localStorage
           console.log(res)
         })
       } else {
