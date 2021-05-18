@@ -1,13 +1,24 @@
 const baseURL =  '';// 'http://localhost:3000/v1/';
 
 function genFetch(method) {
-  return (path, dataObj) => fetch(baseURL + path, {
-    method: String(method).toUpperCase(),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dataObj)
-  }).then(res => res.json())
+  return (path, dataObj) => {
+    const upperCaseMethod = method.toUpperCase();
+    let body = JSON.stringify(dataObj);
+    if (upperCaseMethod === 'GET' || upperCaseMethod === 'HEAD') {
+      body = null;
+      path += '?'
+      Object.keys(dataObj).forEach(v => {
+        path += v + '=' + dataObj[v]
+      }) 
+    }
+    return fetch(baseURL + path, {
+      method: upperCaseMethod,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    }).then(res => res.json())
+  }
 }
 
 const http = {

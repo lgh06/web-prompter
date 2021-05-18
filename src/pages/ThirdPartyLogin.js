@@ -18,8 +18,8 @@ export default function ThirdPartyLogin() {
   const code = query.get('code');
   console.log(path,code);
   const client_id = `7655eb7db1a4a231eabe015c2f9c1db15439d4da3318d36c0c954d5212f14b47`;
-  const redirect_uri_encoded = 'http%3A%2F%2Flocalhost%3A3000%2F3login';
   const redirect_uri = 'http://localhost:3000/3login';
+  const redirect_uri_encoded = 'http%3A%2F%2Flocalhost%3A3000%2F3login';
   useEffect(() => {
     if (!code) return;
     // https://gitee.com/api/v5/swagger#/getV5User
@@ -33,7 +33,9 @@ export default function ThirdPartyLogin() {
     }).then(res =>{
       console.log(res)
       if (!res.error){
-        http.get('https://gitee.com/api/v5/user?access_token=' + res.access_token).then(res =>{
+        http.get('https://gitee.com/api/v5/user', {
+          access_token: res.access_token
+        }).then(res =>{
           console.log(res)
         })
       } else {
