@@ -27,7 +27,7 @@ export default function App() {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/3login?code=333">ThirdPartyLogin</Link>
+            <Link to="/3login">ThirdPartyLogin</Link>
           </li>
           <li>
             <Link to="/topics">Topics</Link>
