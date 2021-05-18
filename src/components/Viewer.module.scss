@@ -20,6 +20,7 @@
     word-break: break-all;
     white-space: pre-wrap;
     font-family: inherit;
+    transition: transform .39s linear;
   }
   &:fullscreen{
     .text{

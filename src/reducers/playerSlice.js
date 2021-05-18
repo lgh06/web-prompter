@@ -19,10 +19,11 @@ const setPlayAndAnimation = createAsyncThunk(
 export const playerSlice = createSlice({
   name: 'player',
   initialState: {
-    speed: 0,
+    speed: 20,
     innerHTML: 'You can paste or input texts here. <br/>你可以把文字粘贴在这里。或用输入法输入。',
     scrollHeight: 600, // whole pre height
-    clientHeight: 1080, // one screen height
+    clientHeight: 1080, // one screen height,
+    movedHeight: 0,
     playing:0,
     paused: 0,
     viewerCSS: {
@@ -68,6 +69,18 @@ export const playerSlice = createSlice({
         nosleep.disable();
         // document.querySelector('.viewer').exitFullscreen()
         document.fullscreenElement && document.exitFullscreen()
+      }else if (p === 'prev'){
+        let h = state.movedHeight - state.clientHeight/2;
+        if (h < 0) {
+          h = 0
+        }
+        state.movedHeight = h;
+      }else if (p === 'next'){
+        let h = state.movedHeight + state.clientHeight/2;
+        if (h < 0) {
+          h = 0
+        }
+        state.movedHeight = h;
       }
     },
     setViewerCSS: (state, action) => {
@@ -80,7 +93,11 @@ export const playerSlice = createSlice({
     animation: (state, action) => {
       console.log('inside animation')
       if (action.payload === 'start'){
-        document.querySelector('pre.text').style.transform = `translateY(-${state.scrollHeight - state.clientHeight/2}px)`
+        // setInterval(() => {
+        //   state.movedHeight += state.speed;
+        //   // document.querySelector('pre.text').style.transform = `translateY(-${movedHeight}px)`
+        // }, 1000)
+        // document.querySelector('pre.text').style.transform = `translateY(-${state.scrollHeight - state.clientHeight/2}px)`
       }else if (action.payload === 'exit'){
         document.querySelector('pre.text').style.transform = ''
       }

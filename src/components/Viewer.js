@@ -9,7 +9,7 @@ import * as player from '../reducers/playerSlice'
 const cn = genClassName(styles);
 
 export default function Viewer() {
-  const { speed, innerHTML, playing, viewerCSS } = useSelector((state) => state.player)
+  const { speed, innerHTML, playing, viewerCSS, movedHeight } = useSelector((state) => state.player)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,10 +19,34 @@ export default function Viewer() {
       }
     })
   });
+  useEffect(() => {
+    console.log('inside movedHeight')
+    document.querySelector('pre.text').style.transform = `translateY(-${movedHeight}px)`
+  }, [movedHeight])
+
+  useEffect(() => {
+    console.log('inside playing, speed')
+    let intervalId;
+    let tmpMovedHeight = movedHeight;
+    if (playing){
+      intervalId = setInterval(() => {
+        tmpMovedHeight += speed/2.5;
+        console.log(tmpMovedHeight, 'tmpMovedHeight')
+        dispatch(player.setState({key: 'movedHeight', value: tmpMovedHeight}))
+      }, 400)
+    } else {
+      dispatch(player.setState({key: 'movedHeight', value: 0}))
+      clearInterval(intervalId);
+    }
+
+    return () =>{
+      clearInterval(intervalId);
+    }
+  }, [playing, speed, movedHeight])
+
   const onChange = (e) => {
     dispatch(player.setInnerHTML( e.target.innerHTML ))
     console.log(e.currentTarget.scrollHeight,  document.body.clientHeight)
-    debugger
     dispatch(player.setState({key: 'scrollHeight', value: e.currentTarget.scrollHeight}));
     dispatch(player.setState({key: 'clientHeight', value: document.body.clientHeight}));
   }
@@ -37,9 +61,9 @@ export default function Viewer() {
       Ctrl + Shift + V ， 或 右键， 粘贴为纯文本 。
       </pre>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('prev'))}>向前Prev</div>
-      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('-10'))}>慢点Slower</div>
+      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('-20'))}>慢点Slower</div>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('pause'))}>暂停Pause</div>
-      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('+10'))}>快点Faster</div>
+      <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('+20'))}>快点Faster</div>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('next'))}>向后Next</div>
       <div {...cn('exit-full @exit-full btn')} 
         onClick={() => playing ? dispatch(player.setPlayAndAnimation('exit')):

@@ -46,8 +46,8 @@ export default function Setting(props) {
   ]
   return (<div {...cn('setting-wrap')}>
     Speed
-    <button onClick={()=>dispatch(player.setSpeed('+10'))}>+</button>
-    <button onClick={()=>dispatch(player.setSpeed('-10'))}>-</button>
+    <button onClick={()=>dispatch(player.setSpeed('+20'))}>+</button>
+    <button onClick={()=>dispatch(player.setSpeed('-20'))}>-</button>
     <input type="number" value={speed} onChange={(e)=>dispatch(player.setSpeed(e.target.value))}></input>
     <br />
     <button onClick={()=>dispatch(player.setInnerHTML(''))}>清空Clear</button>
