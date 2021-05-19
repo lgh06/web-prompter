@@ -1,9 +1,15 @@
-# README
-npm i --sass-binary-site=http://npm.taobao.org/mirrors/node-sass
+# Introduction
+一个运行在浏览器内的提词器，可翻页，可变速，可自定义字体、大小、颜色等多种选项  
+A teleprompter in web browser, page down, speed up , custom font family/size/color and more.  
+
+install:   
+npm i --sass-binary-site=http://npm.taobao.org/mirrors/node-sass --registry=http://npm.taobao.org  
+run:  
+npm start
 
 # TODO 
 
-1. play / pause / exit and use setInterval and css transform / transition
+1. ~~play / pause / exit and use setInterval and css transform / transition~~
 2. ~~gitee~~ / github user login 
 3. one user mapping to one aliyun IOT device, one user using one logic IOT device
 3. ~~dynamically register device~~, product secret should be protected using cloud functions.
