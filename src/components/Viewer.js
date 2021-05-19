@@ -20,6 +20,11 @@ export default function Viewer() {
     })
   });
   useEffect(() => {
+    window.addEventListener('orientationchange',(e) => {
+      dispatch(player.setState({key: 'clientHeight', value: document.body.clientHeight}));
+    })
+  },[]);
+  useEffect(() => {
     console.log('inside movedHeight')
     document.querySelector('pre.text').style.transform = `translateY(-${movedHeight}px)`
   }, [movedHeight])
