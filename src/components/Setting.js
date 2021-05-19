@@ -18,6 +18,13 @@ export default function Setting(props) {
     }))
     
   }
+  const onCheckChange = (e, name) => {
+    let checked = e.currentTarget.checked;
+    dispatch(player.setMirror({
+      key: name,
+      value: checked,
+    }))
+  }
   const cssNameAndHint = [
     {
       key: 'backgroundColor',
@@ -49,6 +56,10 @@ export default function Setting(props) {
     <button onClick={()=>dispatch(player.setSpeed('+20'))}>+20</button>
     <button onClick={()=>dispatch(player.setSpeed('-10'))}>-10</button>
     <input type="number" value={speed} onChange={(e)=>dispatch(player.setSpeed(e.target.value))}></input>
+    <br /><br />
+    <input type="checkbox" id='mirror-h' onChange={(e)=>onCheckChange(e, 'h')} /><label htmlFor="mirror-h">horizon mirror水平翻转</label>
+    <br />
+    <input type="checkbox" id='mirror-v' onChange={(e)=>onCheckChange(e, 'v')} /><label htmlFor="mirror-v">vertical mirror垂直翻转</label>
     <br /><br />
     {/* <button onClick={()=>dispatch(player.setInnerHTML(''))}>清空Clear</button>
     <button onClick={()=>dispatch(player.setPlayAndAnimation('start'))}>开始Start</button>
