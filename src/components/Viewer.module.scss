@@ -29,6 +29,9 @@
     .btn{
       display:inline-block;
     }
+    .clear{
+      display: none;
+    }
   }
 
   .btn{
@@ -52,20 +55,45 @@
     display: none;
     border-radius: 1000px;
     cursor: pointer;
-    background-color: #aaa;
+    background-color: #777;
     transition: all 0.5s;
-    &:hover{
-      opacity: 1;
-      transform:scale(1.5);
+    @media(hover: hover) and (pointer: fine){
+      &:hover{
+        opacity: 1;
+        transform:scale(1.5);
+      }
     }
     font-size: 20px;
     padding: 6px 10px;
     text-align: center;
     box-sizing: border-box;
-    opacity: .6;
+    opacity: .5;
+    @media all and (max-width: 640px){
+      font-size: 12px;
+      padding: 4px 6px;
+      right: 2px;
+      &:nth-of-type(5) {
+        bottom: 80px;
+      }
+      &:nth-of-type(4) {
+        bottom: 130px;
+      }
+      &:nth-of-type(3) {
+        bottom: 180px;
+      }
+      &:nth-of-type(2) {
+        bottom: 230px;
+      }
+      &:nth-of-type(1) {
+        bottom: 280px;
+      }
+    }
   }
   .exit-full{
     bottom: 20px;
+    @media all and (max-width: 400px){
+      bottom: 5px;
+    }
     display: inline-block;
   }
   .clear{

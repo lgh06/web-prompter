@@ -43,12 +43,17 @@ export const playerSlice = createSlice({
       // immutable state based off those changes
       var startWithPlusOrMinus = String(action.payload).indexOf('+') === 0 || 
         String(action.payload).indexOf('-') === 0;
+      let tmpSpeed = state.speed;
 
       if(startWithPlusOrMinus){
-        state.speed += (+action.payload);
+        tmpSpeed = state.speed + (+action.payload);
       } else {
-        state.speed = action.payload? (+action.payload) : state.speed;
+        tmpSpeed = action.payload? (+action.payload) : state.speed;
       }
+      if (tmpSpeed < 0) {
+        tmpSpeed = 0;
+      }
+      state.speed = tmpSpeed;
     },
     setInnerHTML: (state, action) => {
       state.innerHTML = action.payload;

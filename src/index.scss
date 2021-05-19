@@ -39,3 +39,9 @@ ul.nav{
   border-radius: 8px;
   background: linear-gradient(90deg,#434343,#434343 1px,#111 0,#111)
 }
+@media all and (max-width:640px){
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px
+  }
+}
