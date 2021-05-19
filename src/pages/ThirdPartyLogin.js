@@ -47,7 +47,7 @@ export default function ThirdPartyLogin() {
   return (
     <>
     UnFinished未完成 <br/>
-    Source Code see https://github.com/lgh06/web-prompter  
+    Source Code see https://github.com/lgh06/web-prompter   <br/>
     {/* {
       (code) && (
         <>
