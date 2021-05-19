@@ -33,6 +33,10 @@ export const playerSlice = createSlice({
       fontWeight: 'bold',
       fontFamily: 'Microsoft YaHei',
       lineHeight: '1.4'
+    },
+    mirror: {
+      h: false,
+      v: false,
     }
   },
   reducers: {
@@ -99,6 +103,10 @@ export const playerSlice = createSlice({
       const {key, value} = action.payload;
       state[key] = value;
     },
+    setMirror: (state, action) => {
+      const {key, value} = action.payload;
+      state.mirror[key] = value;
+    },
     animation: (state, action) => {
       console.log('inside animation')
       if (action.payload === 'start'){
@@ -118,7 +126,7 @@ export const playerSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setSpeed, setInnerHTML, setPlay, setViewerCSS, setState, animation } = playerSlice.actions
+export const { setSpeed, setInnerHTML, setPlay, setViewerCSS, setState, animation, setMirror } = playerSlice.actions
 export {setPlayAndAnimation}
 
 export default playerSlice.reducer

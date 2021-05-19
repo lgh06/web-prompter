@@ -1,15 +1,26 @@
 import React, { useEffect } from 'react';
 import styles from './Viewer.module.scss';
-import { genClassName, ImageHolder, innerHTML as setInnerHTML } from '../helpers';
+import { genClassName, genClassString, ImageHolder, innerHTML as setInnerHTML } from '../helpers';
 
 import { useSelector, useDispatch } from 'react-redux'
 import * as player from '../reducers/playerSlice'
 
 // used for scss modules https://create-react-app.dev/docs/adding-a-css-modules-stylesheet
 const cn = genClassName(styles);
+const cstr = genClassString(styles);
 
 export default function Viewer() {
-  const { speed, playing, viewerCSS, movedHeight, paused } = useSelector((state) => state.player)
+  const { speed, playing, viewerCSS, movedHeight, paused, mirror } = useSelector((state) => state.player)
+  let preWrapClass = '';
+  if (mirror.v && mirror.h){
+    preWrapClass = 'mirror-hv'
+  }else if (mirror.v){
+    preWrapClass = 'mirror-v'
+  }else if (mirror.h){
+    preWrapClass = 'mirror-h'
+  }else{
+    preWrapClass = ''
+  }
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -60,14 +71,17 @@ export default function Viewer() {
   }
   return (<div {...cn('viewer-wrap')}>
     <div {...cn('viewer @viewer')} style={viewerCSS}>
-      <pre {...cn('text @text')} contentEditable={playing ? 'false': 'true'} onInput={onChange}
-        suppressContentEditableWarning={true}
-      >
-      You can paste or input texts here. <br/>
-      你可以把文字粘贴在这里。或用输入法输入。 <br/>
-      Ctrl + Shift + V , or right click, paste text only. <br/>
-      Ctrl + Shift + V ， 或 右键， 粘贴为纯文本 。
-      </pre>
+      <div
+        className={cstr('pre-wrap @pre-wrap') + ' ' + cstr(preWrapClass)}>
+        <pre {...cn('text @text')} contentEditable={playing ? 'false': 'true'} onInput={onChange}
+          suppressContentEditableWarning={true}
+        >
+        You can paste or input texts here. <br/>
+        你可以把文字粘贴在这里。或用输入法输入。 <br/>
+        Ctrl + Shift + V , or right click, paste text only. <br/>
+        Ctrl + Shift + V ， 或 右键， 粘贴为纯文本 。
+        </pre>
+      </div>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('prev'))}>向前Prev</div>
       <div {...cn('btn')} onClick={()=>dispatch(player.setSpeed('-10'))}>慢点Slower</div>
       <div {...cn('btn')} onClick={() =>dispatch(player.setPlayAndAnimation('pause'))}>

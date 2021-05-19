@@ -11,6 +11,19 @@
   height:80vh;
   min-height: 340px;
   position: relative;
+  .pre-wrap{
+    opacity: 1;
+    height: 100%;
+    &.mirror-h{
+      transform: rotateY(180deg);
+    }
+    &.mirror-v{
+      transform: rotateX(180deg);
+    }
+    &.mirror-hv{
+      transform:rotateX(180deg) rotateY(180deg);
+    }
+  }
   .text{
     margin: 0;
     width: 100%;
@@ -91,7 +104,7 @@
   }
   .exit-full{
     bottom: 20px;
-    @media all and (max-width: 400px){
+    @media all and (max-width: 640px){
       bottom: 5px;
     }
     display: inline-block;
@@ -101,6 +114,9 @@
     left: 2%;
     right:unset;
     bottom: 20px;
+    @media all and (max-width: 640px){
+      bottom: 5px;
+    }
   }
 }
 .status{
