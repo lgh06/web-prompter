@@ -3,7 +3,7 @@
 A teleprompter in web browser, page down, speed up , custom font family/size/color and more.  
 
 install:   
-npm i --sass-binary-site=http://npm.taobao.org/mirrors/node-sass --registry=http://npm.taobao.org  
+npm i --sass-binary-site=https://npm.taobao.org/mirrors/node-sass --registry=https://registry.npm.taobao.org  
 run:  
 npm start
 
