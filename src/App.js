@@ -17,7 +17,7 @@ import {AsyncPage, ErrorBoundary} from './helpers'
 
 export default function App() {
   return (
-    <Router>
+    <Router basename="/web-prompter">
       <div>
         <ul className="nav">
           <li>
